@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PotSpark FPS UI</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <svg class="icon-sprite" aria-hidden="true">
+      <symbol id="icon-play" viewBox="0 0 24 24">
+        <path d="M5 3l14 9-14 9V3z" />
+      </symbol>
+      <symbol id="icon-mode" viewBox="0 0 24 24">
+        <path d="M12 2v4" />
+        <path d="M12 18v4" />
+        <path d="M2 12h4" />
+        <path d="M18 12h4" />
+        <circle cx="12" cy="12" r="5" />
+        <circle cx="12" cy="12" r="1.6" />
+      </symbol>
+      <symbol id="icon-loadout" viewBox="0 0 24 24">
+        <path d="M5 8h14l1.4 10.5A2 2 0 0 1 18.4 21H5.6a2 2 0 0 1-2-2.5L5 8z" />
+        <path d="M8 8V6a4 4 0 0 1 8 0v2" />
+        <path d="M8 14h8" />
+      </symbol>
+      <symbol id="icon-shop" viewBox="0 0 24 24">
+        <path d="M6 7h12l1 14H5L6 7z" />
+        <path d="M9 7a3 3 0 0 1 6 0" />
+        <path d="M8 12h8" />
+      </symbol>
+      <symbol id="icon-profile" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 21a8 8 0 0 1 16 0" />
+      </symbol>
+      <symbol id="icon-friends" viewBox="0 0 24 24">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.9" />
+        <path d="M16 3.1a4 4 0 0 1 0 7.8" />
+      </symbol>
+      <symbol id="icon-chat" viewBox="0 0 24 24">
+        <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8z" />
+      </symbol>
+      <symbol id="icon-settings" viewBox="0 0 24 24">
+        <path d="M12 15.5A3.5 3.5 0 1 0 12 8a3.5 3.5 0 0 0 0 7.5z" />
+        <path d="M19.4 15a1.8 1.8 0 0 0 .4 2l.1.1a2.2 2.2 0 1 1-3.1 3.1l-.1-.1a1.8 1.8 0 0 0-2-.4 1.8 1.8 0 0 0-1.1 1.7V22a2.2 2.2 0 1 1-4.4 0v-.2a1.8 1.8 0 0 0-1.1-1.7 1.8 1.8 0 0 0-2 .4l-.1.1a2.2 2.2 0 1 1-3.1-3.1l.1-.1a1.8 1.8 0 0 0 .4-2 1.8 1.8 0 0 0-1.7-1.1H2a2.2 2.2 0 1 1 0-4.4h.2A1.8 1.8 0 0 0 3.9 9a1.8 1.8 0 0 0-.4-2l-.1-.1a2.2 2.2 0 1 1 3.1-3.1l.1.1a1.8 1.8 0 0 0 2 .4A1.8 1.8 0 0 0 9.7 2.6V2a2.2 2.2 0 1 1 4.4 0v.2a1.8 1.8 0 0 0 1.1 1.7 1.8 1.8 0 0 0 2-.4l.1-.1a2.2 2.2 0 1 1 3.1 3.1l-.1.1a1.8 1.8 0 0 0-.4 2c.3.7.9 1.1 1.7 1.1h.4a2.2 2.2 0 1 1 0 4.4h-.2a1.8 1.8 0 0 0-1.7.9z" />
+      </symbol>
+      <symbol id="icon-credits" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 8h.01" />
+        <path d="M11 12h1v5h1" />
+      </symbol>
+      <symbol id="icon-x" viewBox="0 0 24 24">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="m20 6-11 11-5-5" />
+      </symbol>
+      <symbol id="icon-send" viewBox="0 0 24 24">
+        <path d="m22 2-7 20-4-9-9-4 20-7z" />
+        <path d="M22 2 11 13" />
+      </symbol>
+      <symbol id="icon-shield" viewBox="0 0 24 24">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </symbol>
+      <symbol id="icon-zap" viewBox="0 0 24 24">
+        <path d="M13 2 3 14h8l-1 8 11-14h-8l1-6z" />
+      </symbol>
+      <symbol id="icon-volume" viewBox="0 0 24 24">
+        <path d="M11 5 6 9H2v6h4l5 4V5z" />
+        <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+        <path d="M18.5 5.5a9 9 0 0 1 0 13" />
+      </symbol>
+      <symbol id="icon-star" viewBox="0 0 24 24">
+        <path d="m12 2 3 6 6.5.9-4.7 4.6 1.1 6.5-5.9-3.1L6.1 20l1.1-6.5L2.5 8.9 9 8l3-6z" />
+      </symbol>
+      <symbol id="icon-crosshair" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="7" />
+        <path d="M12 2v4" />
+        <path d="M12 18v4" />
+        <path d="M2 12h4" />
+        <path d="M18 12h4" />
+      </symbol>
+    </svg>
+
+    <canvas id="machineCanvas" aria-hidden="true"></canvas>
+    <canvas id="game-canvas" aria-label="3D game world"></canvas>
+
+    <!-- ─── Loading Overlay ───────────────────────────────────────── -->
+    <div id="loading-overlay" class="loading-overlay" hidden aria-live="polite" role="status">
+      <div class="loading-inner">
+        <div class="loading-brand">
+          <svg class="brand-spark loading-spark brand-spark-svg" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="8,0 44,0 36,44 0,44 0,8" fill="var(--red)" opacity="0.3" stroke="var(--red)" stroke-width="1"/>
+            <path d="M22,8 L16,36" stroke="var(--cream)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M8,22 L36,18" stroke="var(--cream)" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <p>PotSpark</p>
+            <strong>FPS Core</strong>
+          </div>
+        </div>
+        <div class="loading-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div id="load-progress-bar" class="loading-bar-fill"></div>
+        </div>
+        <div class="loading-meta">
+          <span id="load-status-text">Streaming arena geometry…</span>
+          <span id="load-progress-text">0%</span>
+        </div>
+        <div class="loading-tips">
+          <span class="eyebrow">Tip</span>
+          <p>Click the game window after loading to capture your mouse. Press <kbd>Escape</kbd> to release it.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Bottom-Left Loading Corner Widget ────────────────────────── -->
+    <!-- Shown whenever something is loading; hosts morphTo + Animation anims -->
+    <div id="loading-corner-widget" class="loading-corner-widget" aria-hidden="true">
+      <!-- MorphTo polygon animation -->
+      <div class="lcw-morph-wrap">
+        <svg id="corner-morph-svg" class="corner-morph-svg" viewBox="0 0 120 120" fill="none"
+             stroke="var(--teal)" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+          <polygon id="morph-source" points="" fill="rgba(54,224,194,0.12)"></polygon>
+          <polygon id="morph-target" points="" opacity="0"></polygon>
+        </svg>
+      </div>
+      <!-- Map name with #Animation splitText char bounce -->
+      <div class="lcw-label">
+        <span class="lcw-eyebrow">Loading</span>
+        <h2 class="lcw-map-name" id="corner-map-name">Redline Yard</h2>
+      </div>
+    </div>
+
+    <!-- ─── Loadout Selection Overlay ───────────────────────────────── -->
+    <div id="loadout-overlay" class="loadout-overlay" hidden aria-label="Loadout Selection" aria-modal="true" role="dialog">
+      <div class="loadout-inner">
+        <div class="loadout-header">
+          <span class="loadout-eyebrow">PRE-MATCH</span>
+          <h2 class="loadout-title">SELECT LOADOUT</h2>
+          <p class="loadout-sub">Choose your weapon before deploying into the arena</p>
+        </div>
+        <div id="loadout-cards" class="loadout-cards">
+          <!-- Populated dynamically by main.js -->
+        </div>
+        <div class="loadout-footer">
+          <button id="loadout-confirm-btn" class="loadout-confirm-btn" type="button" disabled>
+            <span>CONFIRM &amp; DEPLOY</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── In-Game HUD ───────────────────────────────────────────── -->
+    <div id="hud-overlay" class="hud-overlay" hidden aria-hidden="true">
+      <div id="hud-damage-flash" class="hud-damage-flash" aria-hidden="true"></div>
+      <!-- Crosshair -->
+      <div class="hud-crosshair">
+        <span class="ch-line ch-top"></span>
+        <span class="ch-line ch-right"></span>
+        <span class="ch-line ch-bottom"></span>
+        <span class="ch-line ch-left"></span>
+      </div>
+      <div id="hud-hitmarker" class="hud-hitmarker" hidden aria-hidden="true">
+        <span class="hm-line hm-nw"></span>
+        <span class="hm-line hm-ne"></span>
+        <span class="hm-line hm-sw"></span>
+        <span class="hm-line hm-se"></span>
+      </div>
+      <div id="hud-protected-hit" class="hud-protected-hit" hidden>SPAWN SHIELD</div>
+      <div id="hud-death-overlay" class="hud-death-overlay" hidden>
+        <span class="hud-death-kicker">OPERATOR DOWN</span>
+        <strong>ELIMINATED</strong>
+        <span id="hud-respawn-timer">RESPAWNING IN 3.0s</span>
+      </div>
+      <!-- ─── ESC Pause Menu ──────────────────────────────────────────── -->
+      <div class="hud-pause-overlay" id="hud-unlocked-panel" aria-hidden="true" role="dialog" aria-label="Game Paused">
+        <div class="hud-pause-bg" aria-hidden="true"></div>
+        <aside class="hud-pause-panel">
+          <!-- Top operational rail -->
+          <div class="hud-pause-rail">
+            <span class="hud-pause-rail-tag">SYS.05 // SECURE</span>
+            <span class="hud-pause-rail-status"><span class="hud-pause-pip"></span>ARENA ACTIVE</span>
+          </div>
+
+          <!-- Brand + status -->
+          <div class="hud-pause-brand">
+            <div class="hud-pause-spark-wrap">
+              <svg class="hud-pause-spark-svg" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <polygon points="6,2 34,2 28,34 0,34" fill="var(--red)" fill-opacity="0.18" stroke="var(--red)" stroke-width="1.5" />
+                <polygon points="12,7 30,7 25,29 7,29" fill="var(--red)" fill-opacity="0.3" />
+                <path d="M19,5 L14,31" stroke="var(--cream)" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M6,18 L30,15" stroke="var(--cream)" stroke-width="2.5" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div class="hud-pause-brand-copy">
+              <span class="hud-pause-brand-eyebrow">POTSPARK PROTOCOL</span>
+              <strong class="hud-pause-brand-title">ARENA HOLD</strong>
+            </div>
+            <span class="hud-pause-brand-badge">5v5</span>
+          </div>
+
+          <div class="hud-pause-divider"></div>
+
+          <!-- Title -->
+          <div class="hud-pause-title-row">
+            <div class="hud-pause-eyebrow-line">
+              <span class="hud-pause-teal-slash">//</span>
+              <span class="hud-pause-kicker">SESSION PAUSED</span>
+              <span class="hud-pause-state-pill">HOLD ACTIVE</span>
+            </div>
+            <h2 class="hud-pause-title">PAUSED</h2>
+            <p class="hud-pause-sub">INPUT CAPTURE SUSPENDED &middot; MATCH IN PROGRESS</p>
+          </div>
+
+          <!-- Stats strip -->
+          <div class="hud-pause-stats">
+            <div class="hud-pause-stat-card">
+              <span class="hud-pause-stat-label">
+                <svg class="icon" aria-hidden="true"><use href="#icon-mode"></use></svg>
+                MATCH
+              </span>
+              <strong class="hud-pause-stat-val" id="pause-match-mode">5v5</strong>
+            </div>
+            <div class="hud-pause-stat-card">
+              <span class="hud-pause-stat-label">
+                <svg class="icon" aria-hidden="true"><use href="#icon-crosshair"></use></svg>
+                ARENA
+              </span>
+              <strong class="hud-pause-stat-val">Redline Yard</strong>
+            </div>
+            <div class="hud-pause-stat-card hud-pause-stat-card--vitals">
+              <span class="hud-pause-stat-label">
+                <svg class="icon" aria-hidden="true"><use href="#icon-shield"></use></svg>
+                VITALS
+              </span>
+              <div class="hud-pause-vitals-row">
+                <strong class="hud-pause-stat-val" id="pause-health-val">100</strong>
+                <span class="hud-pause-vitals-unit">HP</span>
+              </div>
+              <div class="hud-pause-hp-track">
+                <div id="pause-health-bar" class="hud-pause-hp-fill" style="width: 100%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <nav class="hud-pause-nav" aria-label="Pause menu actions">
+            <button id="hud-resume-button" class="hud-pause-btn hud-pause-btn--primary" type="button">
+              <span class="hud-pause-btn-accent" aria-hidden="true"></span>
+              <span class="hud-pause-btn-icon" aria-hidden="true">
+                <svg class="icon"><use href="#icon-play"></use></svg>
+              </span>
+              <span class="hud-pause-btn-body">
+                <span class="hud-pause-btn-text">Resume Game</span>
+                <span class="hud-pause-btn-sub">Return to combat</span>
+              </span>
+              <kbd class="hud-pause-shortcut">ESC</kbd>
+            </button>
+            <button class="hud-pause-btn hud-pause-btn--secondary" type="button" id="pause-settings-btn">
+              <span class="hud-pause-btn-accent" aria-hidden="true"></span>
+              <span class="hud-pause-btn-icon" aria-hidden="true">
+                <svg class="icon"><use href="#icon-settings"></use></svg>
+              </span>
+              <span class="hud-pause-btn-body">
+                <span class="hud-pause-btn-text">Settings</span>
+                <span class="hud-pause-btn-sub">Audio &middot; Video &middot; Controls</span>
+              </span>
+              <span class="hud-pause-btn-arrow" aria-hidden="true">&rsaquo;</span>
+            </button>
+            <button class="hud-pause-btn hud-pause-btn--danger" type="button" id="pause-quit-btn">
+              <span class="hud-pause-btn-accent" aria-hidden="true"></span>
+              <span class="hud-pause-btn-icon" aria-hidden="true">
+                <svg class="icon"><use href="#icon-x"></use></svg>
+              </span>
+              <span class="hud-pause-btn-body">
+                <span class="hud-pause-btn-text">Quit to Lobby</span>
+                <span class="hud-pause-btn-sub">Leave current match</span>
+              </span>
+              <span class="hud-pause-btn-tag">EXIT</span>
+            </button>
+          </nav>
+
+          <!-- Footer hint -->
+          <footer class="hud-pause-footer">
+            <div class="hud-pause-hint">
+              <span class="hud-pause-hint-dot" aria-hidden="true"></span>
+              <span>Click anywhere outside or press <kbd class="hud-pause-kbd-inline">ESC</kbd> to resume</span>
+            </div>
+            <div class="hud-pause-terminal-id">POTSPARK // 5V5 NETCODE ACTIVE</div>
+          </footer>
+        </aside>
+      </div>
+      <!-- Click-to-lock prompt (fades once locked) -->
+      <div class="hud-click-prompt" id="hud-click-prompt">
+        <span>Click to capture mouse &nbsp;·&nbsp; <kbd>Escape</kbd> to release</span>
+      </div>
+      <!-- Minimal WASD hint -->
+      <div class="hud-controls-hint">
+        <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Move &nbsp; Mouse Look &nbsp; <kbd>Space</kbd> Jump &nbsp; <kbd>Ctrl</kbd> Crouch</span>
+      </div>
+      <!-- Crouch indicator -->
+      <div id="hud-crouch-indicator" class="hud-crouch-indicator" hidden>
+        <span>&#9660; CROUCHING</span>
+      </div>
+      <div id="hud-health" class="hud-health" hidden>
+        <span class="hud-health-label">VITALS</span>
+        <strong id="hud-health-value">100</strong>
+        <div class="hud-health-track">
+          <span id="hud-health-fill" class="hud-health-fill"></span>
+        </div>
+      </div>
+      <div id="hud-spawn-protection" class="hud-spawn-protection" hidden>
+        SPAWN SHIELD ACTIVE
+      </div>
+      <!-- Coordinates UI -->
+      <div id="hud-coordinates" class="hud-coordinates" hidden>
+        <span id="coord-x">X: 0.00</span>
+        <span id="coord-y">Y: 0.00</span>
+        <span id="coord-z">Z: 0.00</span>
+      </div>
+      <!-- Weapon name -->
+      <div id="hud-weapon-name" class="hud-weapon-name" hidden>
+        <span id="hud-weapon-label">ARC-7</span>
+        <span id="hud-weapon-cat">ASSAULT RIFLE</span>
+      </div>
+      <!-- Ammo counter -->
+      <div id="hud-ammo" class="hud-ammo" hidden>
+        <div class="hud-ammo-count">
+          <span id="ammo-current" class="ammo-cur">30</span>
+          <span class="ammo-sep">/</span>
+          <span id="ammo-max" class="ammo-max">30</span>
+          <span id="ammo-reserve" class="ammo-reserve" hidden></span>
+        </div>
+        <div id="hud-reload-bar" class="hud-reload-bar" hidden>
+          <div id="hud-reload-fill" class="hud-reload-fill"></div>
+          <span class="hud-reload-label">RELOADING</span>
+        </div>
+        <div class="hud-ammo-hint"><kbd>R</kbd> Reload &nbsp; <kbd>RMB</kbd> ADS</div>
+      </div>
+    </div>
+
+    <main id="ui-layer" class="lobby-shell" aria-label="PotSpark FPS lobby">
+      <section class="brand-stack" aria-label="Operation status">
+        <div class="brand-mark" style="border: none; background: none; padding: 0; min-width: auto; box-shadow: none;">
+          <svg class="brand-spark-svg brand-spark-text-logo" viewBox="0 0 130 32" fill="none" stroke="var(--cream)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width: 130px; height: 32px; overflow: visible;">
+            <!-- Letter 'p' -->
+            <path class="logo-line" d="M 8 10 L 8 26" />
+            <path class="logo-line" d="M 8 10 L 16 10 L 16 18 L 8 18" />
+
+            <!-- Letter 'o' -->
+            <path class="logo-line" d="M 22 14 A 4.5 4.5 0 1 1 31 14 A 4.5 4.5 0 1 1 22 14" />
+
+            <!-- Letter 't' -->
+            <path class="logo-line" d="M 40 8 L 40 22" />
+            <path class="logo-line" d="M 36 12 L 44 12" />
+
+            <!-- Letter 'S' -->
+            <path class="logo-line" d="M 56 10 L 50 10 L 50 16 L 56 17 L 56 22 L 50 22" stroke="var(--red)" stroke-width="3" />
+
+            <!-- Letter 'p' -->
+            <path class="logo-line" d="M 64 14 L 64 26" />
+            <path class="logo-line" d="M 64 14 L 72 14 L 72 21 L 64 21" />
+
+            <!-- Letter 'a' -->
+            <path class="logo-line" d="M 86 14 L 86 22" />
+            <path class="logo-line" d="M 78 18 L 86 18 L 86 14 L 78 14 L 78 22" />
+
+            <!-- Letter 'r' -->
+            <path class="logo-line" d="M 92 14 L 92 22" />
+            <path class="logo-line" d="M 92 17 C 94 14, 97 14, 98 14" />
+
+            <!-- Letter 'k' -->
+            <path class="logo-line" d="M 104 8 L 104 22" />
+            <path class="logo-line" d="M 112 14 L 104 17.5 L 112 22" />
+          </svg>
+        </div>
+        <div class="status-chip">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Arena sync active
+        </div>
+      </section>
+
+      <section class="hero-stage" aria-label="Selected mission">
+        <div class="mission-copy">
+          <span class="eyebrow">Episode 01 // Competitive</span>
+          <h1>Redline Yard</h1>
+          <p>Precision entry. Clean angles. Hold the site before the spark core burns out.</p>
+        </div>
+
+        <div class="agent-card" aria-hidden="true">
+          <div class="agent-bg-text">SPARK</div>
+          <div class="agent-figure">
+            <span class="agent-head"></span>
+            <span class="agent-torso"></span>
+            <span class="agent-arm left"></span>
+            <span class="agent-arm right"></span>
+            <span class="agent-leg left"></span>
+            <span class="agent-leg right"></span>
+            <span class="agent-rifle"></span>
+          </div>
+        </div>
+
+        <div class="match-card" aria-label="Current loadout summary">
+          <span class="card-kicker">Selected Contract</span>
+          <strong id="missionModeName">Redline Strike</strong>
+          <p id="missionModeMeta">5v5 tactical rounds</p>
+        </div>
+      </section>
+
+      <section class="right-command" aria-label="Player command center">
+        <div class="top-cluster">
+          <button class="account-button" id="accountButton" type="button" aria-haspopup="dialog" aria-controls="accountModal">
+            <svg class="icon" aria-hidden="true"><use href="#icon-shield"></use></svg>
+            <span class="account-button-copy">
+              <small id="accountButtonKicker">Account</small>
+              <strong id="accountButtonLabel">Sign in</strong>
+            </span>
+          </button>
+          <button class="icon-button cluster-button" type="button" data-panel="settings" aria-label="Settings">
+            <svg class="icon" aria-hidden="true"><use href="#icon-settings"></use></svg>
+            <span class="hover-label">Settings</span>
+          </button>
+          <button class="icon-button cluster-button" type="button" data-panel="credits" aria-label="Credits">
+            <svg class="icon" aria-hidden="true"><use href="#icon-credits"></use></svg>
+            <span class="hover-label">Credits</span>
+          </button>
+          <button class="profile-button" type="button" data-panel="profile" aria-label="Profile">
+            <span class="profile-flames" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span class="avatar-ring">
+              <span class="avatar-initials" data-profile-initials>GE</span>
+            </span>
+            <span class="hover-label">Profile</span>
+          </button>
+        </div>
+
+        <div class="right-stack" aria-label="Social tools">
+          <button class="side-icon" type="button" data-panel="friends" aria-label="Friends">
+            <svg class="icon" aria-hidden="true"><use href="#icon-friends"></use></svg>
+            <span class="mini-badge">3</span>
+            <span class="hover-label">Friends</span>
+          </button>
+          <button class="side-icon" type="button" data-panel="chat" aria-label="Chat">
+            <svg class="icon" aria-hidden="true"><use href="#icon-chat"></use></svg>
+            <span class="mini-badge alert">1</span>
+            <span class="hover-label">Chat</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="bottom-command" aria-label="Main menu">
+        <button class="mech-button play-button" id="playButton" type="button">
+          <svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg>
+          <span id="playText">Play</span>
+        </button>
+
+        <div class="menu-strip">
+          <button class="mech-button secondary-button" type="button" data-panel="mode">
+            <svg class="icon" aria-hidden="true"><use href="#icon-mode"></use></svg>
+            <span>Mode</span>
+          </button>
+          <button class="mech-button secondary-button team-room-button" id="teamRoomButton" type="button" aria-haspopup="dialog" aria-controls="teamRoomModal">
+            <svg class="icon" aria-hidden="true"><use href="#icon-friends"></use></svg>
+            <span id="teamRoomButtonLabel">Team</span>
+            <span class="team-room-count" id="teamRoomCount" hidden>0</span>
+          </button>
+          <button class="mech-button secondary-button" type="button" data-panel="loadout">
+            <svg class="icon" aria-hidden="true"><use href="#icon-loadout"></use></svg>
+            <span>Loadout</span>
+          </button>
+          <button class="mech-button secondary-button" type="button" data-panel="shop">
+            <svg class="icon" aria-hidden="true"><use href="#icon-shop"></use></svg>
+            <span>Shop</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="queue-panel" id="queuePanel" aria-live="polite" hidden>
+        <div>
+          <span class="queue-kicker">Matchmaking</span>
+          <strong id="queueStatus">Finding squad-ready arena</strong>
+        </div>
+        <div class="queue-track" aria-hidden="true">
+          <span id="queueFill"></span>
+        </div>
+      </section>
+
+      <button class="roadmap-launch-button" id="roadmapButton" type="button" aria-haspopup="dialog" aria-controls="roadmapModal">
+        <span class="roadmap-launch-mark" aria-hidden="true">
+          <svg class="icon"><use href="#icon-star"></use></svg>
+        </span>
+        <span class="roadmap-launch-copy">
+          <small>Roadmap // 04</small>
+          <strong>Coming Soon</strong>
+        </span>
+        <span class="roadmap-launch-arrow" aria-hidden="true">↗</span>
+      </button>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+
+    <!-- ─── Full-Screen Lobby Control Center ────────────────────────── -->
+    <div id="controlCenter" class="control-center" hidden aria-modal="true" role="dialog" aria-label="Lobby Control Center">
+      <div class="cc-backdrop"></div>
+      <div class="cc-shell">
+        <header class="cc-header">
+          <div class="cc-brand">
+            <svg class="brand-spark cc-brand-spark brand-spark-svg" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="8,0 44,0 36,44 0,44 0,8" fill="var(--red)" opacity="0.3" stroke="var(--red)" stroke-width="1"/>
+              <path class="logo-line" d="M22,8 L16,36" stroke="var(--cream)" stroke-width="3" stroke-linecap="round"/>
+              <path class="logo-line" d="M8,22 L36,18" stroke="var(--cream)" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <p>PotSpark</p>
+              <strong>Control Center</strong>
+            </div>
+          </div>
+          <nav class="cc-tabs" aria-label="Control Center tabs">
+            <button class="cc-tab-btn" data-cc-tab="arena">
+              <svg class="icon" aria-hidden="true"><use href="#icon-mode"></use></svg>
+              <span>Arena</span>
+            </button>
+            <button class="cc-tab-btn" data-cc-tab="arsenal">
+              <svg class="icon" aria-hidden="true"><use href="#icon-loadout"></use></svg>
+              <span>Arsenal</span>
+            </button>
+            <button class="cc-tab-btn" data-cc-tab="store">
+              <svg class="icon" aria-hidden="true"><use href="#icon-shop"></use></svg>
+              <span>Store</span>
+            </button>
+            <button class="cc-tab-btn" data-cc-tab="career">
+              <svg class="icon" aria-hidden="true"><use href="#icon-profile"></use></svg>
+              <span>Career</span>
+            </button>
+          </nav>
+          <button class="cc-close-btn" id="ccCloseBtn" type="button" aria-label="Close Control Center">
+            <svg class="icon" aria-hidden="true"><use href="#icon-x"></use></svg>
+            <span>Close</span>
+          </button>
+        </header>
+        <div class="cc-body" id="ccBody">
+          <!-- Populated dynamically by ui.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Right-Side Social Drawer ────────────────────────────────── -->
+    <div id="socialDrawer" class="social-drawer" hidden aria-modal="true" role="dialog" aria-label="Social Drawer">
+      <div class="drawer-backdrop" id="socialDrawerBackdrop"></div>
+      <div class="drawer-shell">
+        <header class="drawer-header">
+          <div class="drawer-title">
+            <svg class="icon" aria-hidden="true"><use href="#icon-friends"></use></svg>
+            <h2>Squad Comms</h2>
+          </div>
+          <div class="drawer-tabs">
+            <button class="drawer-tab-btn is-active" data-drawer-tab="chat">Chat</button>
+            <button class="drawer-tab-btn" data-drawer-tab="friends">Friends</button>
+          </div>
+          <button id="socialDrawerCloseBtn" class="drawer-close-btn" type="button" aria-label="Close social panel">
+            <svg class="icon" aria-hidden="true"><use href="#icon-x"></use></svg>
+          </button>
+        </header>
+        <div class="drawer-body" id="socialDrawerBody">
+          <!-- Populated dynamically by ui.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Center Utility Modal ────────────────────────────────────── -->
+    <div id="utilityModal" class="utility-modal" hidden aria-modal="true" role="dialog" aria-label="Utility Dialog">
+      <div class="modal-backdrop" id="utilityModalBackdrop"></div>
+      <div class="modal-shell">
+        <header class="modal-header">
+          <div class="modal-title">
+            <svg class="icon" id="utilityModalIcon" aria-hidden="true"><use href="#icon-settings"></use></svg>
+            <h2 id="utilityModalTitle">Settings</h2>
+          </div>
+          <button id="utilityModalCloseBtn" class="modal-close-btn" type="button" aria-label="Close settings">
+            <svg class="icon" aria-hidden="true"><use href="#icon-x"></use></svg>
+          </button>
+        </header>
+        <div class="modal-body" id="utilityModalBody">
+          <!-- Populated dynamically by ui.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Server-Owned Team Room ─────────────────────────────────── -->
+    <div id="teamRoomModal" class="utility-modal team-room-modal" hidden aria-modal="true" role="dialog" aria-labelledby="teamRoomTitle">
+      <div class="modal-backdrop" id="teamRoomBackdrop"></div>
+      <div class="modal-shell team-room-shell">
+        <header class="modal-header">
+          <div class="modal-title">
+            <svg class="icon" aria-hidden="true"><use href="#icon-friends"></use></svg>
+            <div>
+              <span class="team-room-header-kicker">Private Match</span>
+              <h2 id="teamRoomTitle">Team Room</h2>
+            </div>
+          </div>
+          <button id="teamRoomCloseBtn" class="modal-close-btn" type="button" aria-label="Close team room">
+            <svg class="icon" aria-hidden="true"><use href="#icon-x"></use></svg>
+          </button>
+        </header>
+        <div class="modal-body team-room-body" id="teamRoomBody" aria-live="polite">
+          <!-- Populated dynamically by ui.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Coming Soon Roadmap ────────────────────────────────────── -->
+    <div id="roadmapModal" class="utility-modal roadmap-modal" hidden aria-modal="true" role="dialog" aria-labelledby="roadmapTitle">
+      <div class="modal-backdrop" id="roadmapBackdrop"></div>
+      <div class="modal-shell roadmap-shell">
+        <header class="modal-header">
+          <div class="modal-title">
+            <svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg>
+            <div>
+              <span class="roadmap-header-kicker">Next on the grid</span>
+              <h2 id="roadmapTitle">Coming Soon</h2>
+            </div>
+          </div>
+          <button id="roadmapCloseBtn" class="modal-close-btn" type="button" aria-label="Close coming soon roadmap">
+            <svg class="icon" aria-hidden="true"><use href="#icon-x"></use></svg>
+          </button>
+        </header>
+        <div class="modal-body roadmap-body">
+          <section class="roadmap-intro">
+            <div>
+              <span class="roadmap-season">Future Drop // In Development</span>
+              <h3>The Spark is expanding.</h3>
+            </div>
+            <p>Four major additions are being forged for PotSpark. These concept previews show the direction—not a release promise carved into suspicious concrete.</p>
+          </section>
+
+          <div class="roadmap-grid">
+            <article class="roadmap-card roadmap-card-map">
+              <div class="roadmap-card-media">
+                <img data-roadmap-src="./assets/roadmap/ashfall-foundry.jpg" alt="Concept art of the Ashfall Foundry arena with catwalks and molten channels" loading="lazy" decoding="async">
+                <span class="roadmap-card-index">01</span>
+                <span class="roadmap-card-status">New map</span>
+              </div>
+              <div class="roadmap-card-copy">
+                <span class="roadmap-card-kicker">Arena expansion</span>
+                <h3>Ashfall Foundry</h3>
+                <p>Fight across vertical catwalks, furnace lanes, and fast flank routes where every angle glows dangerous.</p>
+                <div class="roadmap-tags"><span>3 lanes</span><span>High ground</span><span>Hazards</span></div>
+              </div>
+            </article>
+
+            <article class="roadmap-card roadmap-card-modes">
+              <div class="roadmap-card-media">
+                <img data-roadmap-src="./assets/roadmap/game-modes.jpg" alt="Two opposing squads rushing toward a glowing objective in a tactical arena" loading="lazy" decoding="async">
+                <span class="roadmap-card-index">02</span>
+                <span class="roadmap-card-status">Game modes</span>
+              </div>
+              <div class="roadmap-card-copy">
+                <span class="roadmap-card-kicker">New ways to fight</span>
+                <h3>Core Rush + Last Spark</h3>
+                <p>Escort a volatile Spark Core with your squad—or survive tense one-life elimination rounds.</p>
+                <div class="roadmap-tags"><span>Objective</span><span>Elimination</span><span>Team play</span></div>
+              </div>
+            </article>
+
+            <article class="roadmap-card roadmap-card-shop">
+              <div class="roadmap-card-media">
+                <img data-roadmap-src="./assets/roadmap/armory-shop.jpg" alt="Three futuristic guns displayed with red, teal, and gold collectible skins" loading="lazy" decoding="async">
+                <span class="roadmap-card-index">03</span>
+                <span class="roadmap-card-status">Shop</span>
+              </div>
+              <div class="roadmap-card-copy">
+                <span class="roadmap-card-kicker">The armory</span>
+                <h3>Skins, charms &amp; gear</h3>
+                <p>Collect bold gun finishes, weapon charms, profile cosmetics, and upgrade materials for your loadout.</p>
+                <div class="roadmap-tags"><span>Gun skins</span><span>Cosmetics</span><span>Rotating drops</span></div>
+              </div>
+            </article>
+
+            <article class="roadmap-card roadmap-card-upgrades">
+              <div class="roadmap-card-media">
+                <img data-roadmap-src="./assets/roadmap/weapon-upgrades.jpg" alt="A futuristic rifle and upgrade modules arranged on a technical workbench" loading="lazy" decoding="async">
+                <span class="roadmap-card-index">04</span>
+                <span class="roadmap-card-status">Upgrades</span>
+              </div>
+              <div class="roadmap-card-copy">
+                <span class="roadmap-card-kicker">Weapon lab</span>
+                <h3>Build your playstyle</h3>
+                <p>Earn modules for optics, recoil control, handling, and reload speed—all kept within server-verified limits.</p>
+                <div class="roadmap-tags"><span>Optics</span><span>Handling</span><span>Progression</span></div>
+              </div>
+            </article>
+          </div>
+
+          <footer class="roadmap-footer">
+            <span class="roadmap-footer-pulse" aria-hidden="true"></span>
+            <p>Concept content shown in development. Names, balance, and final visuals may evolve before release.</p>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Account & Identity ──────────────────────────────────────── -->
+    <div id="accountModal" class="utility-modal account-modal" hidden aria-modal="true" role="dialog" aria-labelledby="accountModalTitle">
+      <div class="modal-backdrop" id="accountBackdrop"></div>
+      <div class="modal-shell account-shell">
+        <header class="modal-header">
+          <div class="modal-title">
+            <svg class="icon" aria-hidden="true"><use href="#icon-shield"></use></svg>
+            <div>
+              <span class="account-header-kicker">Protected identity</span>
+              <h2 id="accountModalTitle">Potspark Account</h2>
+            </div>
+          </div>
+          <button id="accountCloseButton" class="modal-close-btn" type="button" aria-label="Close account dialog">
+            <svg class="icon" aria-hidden="true"><use href="#icon-x"></use></svg>
+          </button>
+        </header>
+        <div class="modal-body account-body" id="accountBody" aria-live="polite">
+          <div class="account-loading"><span></span>Securing identity channel…</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Custom RMB Context Menu ────────────────────────────────── -->
+    <div id="customContextMenu" class="custom-ctx-menu" hidden aria-hidden="true" role="menu" aria-label="Tactical quick actions">
+      <div class="ctx-menu-header">
+        <span class="ctx-menu-title">Tactical Controls</span>
+        <span class="ctx-menu-badge">Hold</span>
+      </div>
+      <ul class="ctx-menu-list">
+        <li>
+          <button class="ctx-menu-item" type="button" data-ctx="aim">
+            <svg class="icon" aria-hidden="true"><use href="#icon-crosshair"></use></svg>
+            <span class="ctx-menu-label">Aim Down Sights</span>
+            <kbd>RMB</kbd>
+          </button>
+        </li>
+        <li>
+          <button class="ctx-menu-item" type="button" data-ctx="reload">
+            <svg class="icon" aria-hidden="true"><use href="#icon-zap"></use></svg>
+            <span class="ctx-menu-label">Reload Weapon</span>
+            <kbd>R</kbd>
+          </button>
+        </li>
+        <li>
+          <button class="ctx-menu-item" type="button" data-ctx="crouch">
+            <svg class="icon" aria-hidden="true"><use href="#icon-shield"></use></svg>
+            <span class="ctx-menu-label">Crouch Stance</span>
+            <kbd>Ctrl</kbd>
+          </button>
+        </li>
+        <li>
+          <button class="ctx-menu-item" type="button" data-ctx="coords">
+            <svg class="icon" aria-hidden="true"><use href="#icon-mode"></use></svg>
+            <span class="ctx-menu-label">Toggle Coordinates</span>
+            <kbd>K</kbd>
+          </button>
+        </li>
+      </ul>
+      <div class="ctx-menu-footer">
+        <span class="ctx-menu-hint"><kbd>ESC</kbd> Close</span>
+        <span class="ctx-menu-mode">RMB Combat ADS</span>
+      </div>
+    </div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./js/vendor/three.module.js",
+          "three/addons/": "./js/vendor/",
+          "three-mesh-bvh": "./js/vendor/three-mesh-bvh/index.module.js",
+          "animejs": "https://esm.sh/animejs@4"
+        }
+      }
+    </script>
+    <script type="module" src="./js/ui.js"></script>
+    <script type="module" src="./js/auth.js"></script>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
