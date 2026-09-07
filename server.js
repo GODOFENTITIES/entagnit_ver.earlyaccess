@@ -8,7 +8,7 @@ async function main() {
     },
   });
   const address = await app.start();
-  const host = typeof address === "object" && address ? address.address : "127.0.0.1";
+  const host = typeof address === "object" && address ? address.address : "0.0.0.0";
   const port = typeof address === "object" && address ? address.port : process.env.PORT || 5186;
 
   console.info("");
