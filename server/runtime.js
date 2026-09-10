@@ -94,13 +94,13 @@ function buildSecurityHeaders() {
   // client can open WSS connections. Falls back to the baseline policy when
   // SUPABASE_URL is not configured (dev/CI without chat).
   const supabaseUrl = process.env.SUPABASE_URL || "";
-  let connectSrc = "'self' blob: ws: wss:";
+  let connectSrc = "'self' blob: ws: wss: https://esm.sh";
   if (supabaseUrl) {
     try {
       const parsed = new URL(supabaseUrl);
       const httpsOrigin = `${parsed.protocol}//${parsed.host}`;
       const wssOrigin = `wss://${parsed.host}`;
-      connectSrc = `'self' blob: ws: wss: ${httpsOrigin} ${wssOrigin}`;
+      connectSrc = `'self' blob: ws: wss: https://esm.sh ${httpsOrigin} ${wssOrigin}`;
     } catch {
       // malformed SUPABASE_URL — skip the injection
     }
