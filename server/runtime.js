@@ -594,7 +594,7 @@ function remoteAddress(req) {
 export async function createPotSparkServer(options = {}) {
   const root = path.resolve(options.root || DEFAULT_ROOT);
   const mapPath = path.resolve(options.mapPath || path.join(root, "assets/models/map_1.glb"));
-  const host = options.host ?? process.env.HOST ?? "127.0.0.1";
+  const host = options.host ?? process.env.HOST ?? "0.0.0.0";
   const port = Number(options.port ?? process.env.PORT ?? 5186);
 
   let ownsWorld = false;
